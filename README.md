@@ -67,3 +67,29 @@ ab? | b가 없거나 b와 일치
 \s | 공백(space, tab 등)에 일치  
 (?=) | 앞쪽일치(Lookahead)  
 (?<=) | 뒤쪽일치(Lookbehind)  
+
+## ID 정규표현식 예
+```
+//정규표현식 생성 : 글자길이 6~20자, 영문과 숫자 조합
+// const regexp = /^[A-Za-z0-9]{6,20}$/;
+// const regexp = /^[A-Za-z\d]{6,20}$/;
+// +는 한글자 이상 *는 0글자이상
+// const regexp = /^([A-Za-z]+[0-9]*){6,20}$/;
+//반드시 영문,숫자가 조합되야 함
+// const regexp = /^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z\d]{6,20}$/;
+//영문은반드시, 숫자는 선택
+
+//?=는 앞글자와 비교할때
+const regexp = /^(?=.*[A-Za-z])+(?=.*[0-9])*[A-Za-z\d]{6,20}$/;
+
+// '' : true : false
+if(value===''){
+  this.setState({isRegExpId :''});
+}else { //정규표현식 확인 (점검테스트)test()메서드 : Boolean 반환
+  if(regexp.test(value)){
+    this.setState({isRegExpId :true}); //.green
+  }else{
+    this.setState({isRegExpId :false}); //.red
+  }
+}
+```
